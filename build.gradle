@@ -1,0 +1,56 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.4.3'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id 'java-library'
+}
+
+bootJar.enabled = true  // 실행 가능한 JAR 생성 활성화
+jar.enabled = false     // 일반 JAR 비활성화
+
+allprojects {
+	group = 'com.example.redis_pj'
+	version = '0.0.1-SNAPSHOT'
+	sourceCompatibility = '21'
+
+	repositories {
+		mavenCentral()
+	}
+}
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+subprojects {
+	apply plugin: 'java'
+	apply plugin: 'java-library'
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+
+	repositories {
+		mavenCentral()
+	}
+
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
+	// 공통 dependencies 추가
+	dependencies {
+		compileOnly 'org.projectlombok:lombok'
+		annotationProcessor 'org.projectlombok:lombok'
+
+		// Spring Boot Starter Web (API 서버 실행을 위해 필요)
+		implementation("org.springframework.boot:spring-boot-starter-web")
+
+		// Jackson 관련 라이브러리 명시적 추가 (버전 충돌 방지)
+		implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
+		implementation("com.fasterxml.jackson.core:jackson-core:2.16.1")
+		implementation("com.fasterxml.jackson.core:jackson-annotations:2.16.1")
+	}
+}
