@@ -5,7 +5,7 @@ FROM openjdk:21-jdk
 WORKDIR /app
 
 # 3. JAR 파일 복사
-COPY movie-api/gbuild/libs/*.jar app.jar
+COPY movie-api/build/libs/*.jar app.jar
 
 # 4. 실행 포트 설정
 EXPOSE 8080
