@@ -1,0 +1,72 @@
+DELIMITER $$
+
+CREATE PROCEDURE insert_large_test_data()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    DECLARE j INT DEFAULT 1;
+    DECLARE k INT DEFAULT 1;
+    DECLARE seat_label CHAR(1);
+
+    -- 영화 데이터 500개 삽입
+    WHILE i <= 500 DO
+        INSERT INTO movie (title, thumbnail, genre, rating, release_date, running_time, created_by)
+        VALUES
+        (CONCAT('영화 ', i),
+         CONCAT('thumbnail', i, '.jpg'),
+         ELT(FLOOR(1 + (RAND() * 5)), '액션', '코미디', '드라마', '공포', 'SF'),
+         ELT(FLOOR(1 + (RAND() * 4)), '전체관람가', '12세 이상', '15세 이상', '청소년 관람불가'),
+         DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 1000) DAY),
+         FLOOR(RAND() * 180 + 90),
+         'admin');
+        SET i = i + 1;
+    END WHILE;
+
+    -- 상영관 데이터 50개 삽입
+    SET i = 1;
+    WHILE i <= 50 DO
+        INSERT INTO theater (theater_name, created_by)
+        VALUES (CONCAT('상영관 ', i), 'admin');
+        SET i = i + 1;
+    END WHILE;
+
+    -- 좌석 데이터 (각 상영관당 5x5 = 25개 좌석 생성)
+    SET i = 1;
+    WHILE i <= 50 DO  -- 상영관 50개
+        SET j = 1;
+        WHILE j <= 5 DO  -- 행 (A~E)
+            SET seat_label = CHAR(64 + j); -- ASCII(A~E)
+            SET k = 1;
+            WHILE k <= 5 DO  -- 열 (1~5)
+                INSERT INTO seat (theater_id, seat_number, created_by)
+                VALUES
+                (i, CONCAT(seat_label, k), 'admin');
+                SET k = k + 1;
+            END WHILE;
+            SET j = j + 1;
+        END WHILE;
+        SET i = i + 1;
+    END WHILE;
+
+    -- 회원 데이터 500개 삽입
+    SET i = 1;
+    WHILE i <= 500 DO
+        INSERT INTO user (user_name, created_by)
+        VALUES
+        (CONCAT('사용자 ', i), 'admin');
+        SET i = i + 1;
+    END WHILE;
+
+    -- 예매 데이터 500개 삽입
+    SET i = 1;
+    WHILE i <= 500 DO
+        INSERT INTO reservation (user_id, seat_id, reservation_time)
+        VALUES
+        (FLOOR(RAND() * 500 + 1),
+         FLOOR(RAND() * 1250 + 1),
+         NOW());
+        SET i = i + 1;
+    END WHILE;
+
+END $$
+
+DELIMITER ;
