@@ -4,4 +4,6 @@ jar.enabled = true        //일반적인 JAR 파일로 패키징시킨다
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+    api 'com.fasterxml.jackson.core:jackson-annotations:2.10.1'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.13.5'
 }

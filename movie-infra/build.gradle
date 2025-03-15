@@ -1,7 +1,7 @@
-bootJar.enabled = false   // 공통 모듈은 bootJar 로 패키징 할 필요 없음
-jar.enabled = true        //일반적인 JAR 파일로 패키징시킨다
+bootJar.enabled = false
+jar.enabled = true
 
 dependencies {
+    implementation project(':movie-domain')
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-aop'
 }

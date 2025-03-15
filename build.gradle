@@ -5,17 +5,13 @@ plugins {
 	id 'java-library'
 }
 
-bootJar.enabled = true  // 실행 가능한 JAR 생성 활성화
-jar.enabled = false     // 일반 JAR 비활성화
+bootJar.enabled = false
+jar.enabled = true
 
 allprojects {
 	group = 'com.example.redis_pj'
 	version = '0.0.1-SNAPSHOT'
 	sourceCompatibility = '21'
-
-	repositories {
-		mavenCentral()
-	}
 }
 
 java {
@@ -40,17 +36,15 @@ subprojects {
 		}
 	}
 
-	// 공통 dependencies 추가
+	// 관리하는 모듈에 공통 dependencies
 	dependencies {
+		implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+		implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'
+		runtimeOnly 'com.mysql:mysql-connector-j'
 		compileOnly 'org.projectlombok:lombok'
+		implementation 'org.modelmapper:modelmapper:2.4.2'
 		annotationProcessor 'org.projectlombok:lombok'
-
-		// Spring Boot Starter Web (API 서버 실행을 위해 필요)
-		implementation("org.springframework.boot:spring-boot-starter-web")
-
-		// Jackson 관련 라이브러리 명시적 추가 (버전 충돌 방지)
-		implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
-		implementation("com.fasterxml.jackson.core:jackson-core:2.16.1")
-		implementation("com.fasterxml.jackson.core:jackson-annotations:2.16.1")
+		annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	}
+
 }
