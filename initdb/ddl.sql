@@ -1,6 +1,6 @@
 -- 데이터베이스 생성 및 사용
-CREATE DATABASE IF NOT EXISTS movie_db;
-USE movie_db;
+CREATE DATABASE IF NOT EXISTS redis;
+USE redis;
 
 -- 영화 테이블
 CREATE TABLE movie (
