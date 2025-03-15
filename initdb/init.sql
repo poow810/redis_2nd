@@ -7,14 +7,14 @@ BEGIN
     DECLARE k INT DEFAULT 1;
     DECLARE seat_label CHAR(1);
 
-    -- 영화 데이터 500개 삽입
+    -- 영화 데이터 500개 삽입 (ENUM 영어로 변경)
     WHILE i <= 500 DO
         INSERT INTO movie (title, thumbnail, genre, rating, release_date, running_time, created_by)
         VALUES
-        (CONCAT('영화 ', i),
+        (CONCAT('Movie ', i),
          CONCAT('thumbnail', i, '.jpg'),
-         ELT(FLOOR(1 + (RAND() * 5)), '액션', '코미디', '드라마', '공포', 'SF'),
-         ELT(FLOOR(1 + (RAND() * 4)), '전체관람가', '12세 이상', '15세 이상', '청소년 관람불가'),
+         ELT(FLOOR(RAND() * 5) + 1, 'action', 'comedy', 'drama', 'horror', 'sci-fi'),
+         ELT(FLOOR(RAND() * 4) + 1, 'all', '12+', '15+', '18+'),
          DATE_SUB(NOW(), INTERVAL FLOOR(RAND() * 1000) DAY),
          FLOOR(RAND() * 180 + 90),
          'admin');
@@ -25,7 +25,7 @@ BEGIN
     SET i = 1;
     WHILE i <= 50 DO
         INSERT INTO theater (theater_name, created_by)
-        VALUES (CONCAT('상영관 ', i), 'admin');
+        VALUES (CONCAT('Theater ', i), 'admin');
         SET i = i + 1;
     END WHILE;
 
@@ -52,7 +52,7 @@ BEGIN
     WHILE i <= 500 DO
         INSERT INTO user (user_name, created_by)
         VALUES
-        (CONCAT('사용자 ', i), 'admin');
+        (CONCAT('User ', i), 'admin');
         SET i = i + 1;
     END WHILE;
 
@@ -62,7 +62,7 @@ BEGIN
         INSERT INTO reservation (user_id, seat_id, reservation_time)
         VALUES
         (FLOOR(RAND() * 500 + 1),
-         FLOOR(RAND() * 1250 + 1),
+         FLOOR(RAND() * 1250 + 1),  -- 50개 상영관 * 25좌석 = 1250좌석 중 랜덤 선택
          NOW());
         SET i = i + 1;
     END WHILE;
@@ -70,3 +70,5 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+CALL insert_large_test_data();
