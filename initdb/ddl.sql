@@ -6,7 +6,7 @@ USE redis;
 CREATE TABLE movie (
     movie_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
-    thumbnail VARCHAR(255),
+    thumbnail_url VARCHAR(255),
     genre ENUM('action', 'comedy', 'drama', 'horror', 'sci-fi') NOT NULL,
     rating ENUM('all', '12+', '15+', '18+') NOT NULL,
     release_date DATE NOT NULL,

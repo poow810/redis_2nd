@@ -36,7 +36,6 @@ subprojects {
 		}
 	}
 
-	// 관리하는 모듈에 공통 dependencies
 	dependencies {
 		implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
 		implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0'

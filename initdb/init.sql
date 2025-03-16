@@ -9,7 +9,7 @@ BEGIN
 
     -- 영화 데이터 500개 삽입 (ENUM 영어로 변경)
     WHILE i <= 500 DO
-        INSERT INTO movie (title, thumbnail, genre, rating, release_date, running_time, created_by)
+        INSERT INTO movie (title, thumbnail_url, genre, rating, release_date, running_time, created_by)
         VALUES
         (CONCAT('Movie ', i),
          CONCAT('thumbnail', i, '.jpg'),
