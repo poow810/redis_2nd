@@ -14,7 +14,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ../initdb/ddl.sql:/docker-entrypoint-initdb.d/ddl.sql
+      - /home/root1/redis_2nd/initdb/ddl.sql
     networks:
       - app_network
 
