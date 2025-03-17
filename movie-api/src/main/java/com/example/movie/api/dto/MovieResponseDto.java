@@ -1,4 +1,4 @@
-package com.example.movie.domain.dto;
+package com.example.movie.api.dto;
 
 import com.example.movie.domain.entity.Movie;
 import com.example.movie.domain.entity.Schedule;
@@ -18,7 +18,7 @@ public class MovieResponseDto {
     private String releaseDate;
     private int runningTime;
     private String theaterName;
-    private List<LocalDateTime> scheduleTimes; // 상영 시간표
+    private List<LocalDateTime> scheduleTimes;
 
     public static MovieResponseDto fromEntity(Movie movie, List<Schedule> schedules) {
         return MovieResponseDto.builder()

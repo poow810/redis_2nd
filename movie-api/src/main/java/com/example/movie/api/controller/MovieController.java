@@ -1,9 +1,8 @@
 package com.example.movie.api.controller;
 
 
-import com.example.movie.domain.dto.MovieResponseDto;
-import com.example.movie.domain.entity.Movie;
-import com.example.movie.domain.service.MovieService;
+import com.example.movie.api.dto.MovieResponseDto;
+import com.example.movie.api.service.MovieService;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

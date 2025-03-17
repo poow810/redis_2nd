@@ -38,3 +38,4 @@ out/
 
 .env
 /docker/.env
+movie-application/src/main/resources/application-release.properties

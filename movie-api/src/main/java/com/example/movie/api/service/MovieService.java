@@ -1,12 +1,11 @@
-package com.example.movie.domain.service;
+package com.example.movie.api.service;
 
 
-import com.example.movie.domain.dto.MovieResponseDto;
+import com.example.movie.api.dto.MovieResponseDto;
 import com.example.movie.domain.entity.Movie;
 import com.example.movie.domain.entity.Schedule;
 import com.example.movie.domain.repository.MovieRepository;
 import com.example.movie.domain.repository.ScheduleRepository;
-import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +18,6 @@ public class MovieService {
     private final MovieRepository movieRepository;
     private final ScheduleRepository scheduleRepository;
 
-    @Transactional
     public List<MovieResponseDto> getMovies() {
         List<Movie> movies = movieRepository.findAllByOrderByReleaseDateDesc();
 
