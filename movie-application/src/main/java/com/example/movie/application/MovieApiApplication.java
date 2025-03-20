@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = {"com.example.movie"})
 @EnableJpaRepositories(basePackages = "com.example.movie.domain.repository")
 @EntityScan(basePackages = "com.example.movie.domain.entity")
+@EnableJpaAuditing
 public class MovieApiApplication {
 
     public static void main(String[] args) {
