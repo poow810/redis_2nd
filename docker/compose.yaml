@@ -16,23 +16,5 @@ services:
       - mysql_data:/var/lib/mysql
       - /home/root1/redis_2nd/initdb/ddl.sql
 
-  app:
-    build:
-      context: ..
-      dockerfile: docker/Dockerfile
-    container_name: spring_app
-    restart: always
-    depends_on:
-      - db
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/redis?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_PROFILES_ACTIVE: release
-    ports:
-      - "8080:8080"
-
-
 volumes:
   mysql_data:
