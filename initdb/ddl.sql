@@ -37,9 +37,7 @@ CREATE TABLE schedule (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     created_by VARCHAR(100),
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    updated_by VARCHAR(100),
-    FOREIGN KEY (movie_id) REFERENCES movie(movie_id) ON DELETE CASCADE,
-    FOREIGN KEY (theater_id) REFERENCES theater(theater_id) ON DELETE CASCADE
+    updated_by VARCHAR(100)
 );
 
 -- 좌석 테이블
@@ -50,14 +48,15 @@ CREATE TABLE seat (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     created_by VARCHAR(100),
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    updated_by VARCHAR(100),
-    FOREIGN KEY (theater_id) REFERENCES theater(theater_id) ON DELETE CASCADE
+    updated_by VARCHAR(100)
 );
 
 -- 회원 테이블
 CREATE TABLE user (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     user_name VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20) UNIQUE NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     created_by VARCHAR(100),
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -69,7 +68,5 @@ CREATE TABLE reservation (
     reservation_id INT AUTO_INCREMENT PRIMARY KEY,
     reservation_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     user_id INT NOT NULL,
-    seat_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (seat_id) REFERENCES seat(seat_id) ON DELETE CASCADE
+    seat_id INT NOT NULL
 );
