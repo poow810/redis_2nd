@@ -25,7 +25,7 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<List<MovieResponseDto>> getAllMovies(@RequestParam("theater_id") Long theaterId) {
-        List<MovieResponseDto> movies = movieService.getMovies(theaterId);
+        List<MovieResponseDto> movies = movieService.getMovieByTheaterId(theaterId);
         return ResponseEntity.status(HttpStatus.OK).body(movies);
     }
 }

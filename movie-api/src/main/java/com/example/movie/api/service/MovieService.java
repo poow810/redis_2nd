@@ -24,7 +24,7 @@ public class MovieService {
     private final MovieRepository movieRepository;
 
     @Transactional(readOnly = true)
-    public List<MovieResponseDto> getMovies(Long theaterId) {
+    public List<MovieResponseDto> getMovieByTheaterId(Long theaterId) {
 
         List<Movie> movies = movieRepository.findNowShowingMovies(theaterId);
 
