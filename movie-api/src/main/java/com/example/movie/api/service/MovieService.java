@@ -1,35 +1,36 @@
 package com.example.movie.api.service;
 
-
 import com.example.movie.api.dto.MovieResponseDto;
 import com.example.movie.domain.entity.Movie;
-import com.example.movie.domain.entity.Schedule;
-import com.example.movie.domain.repository.MovieRepository;
-import com.example.movie.domain.repository.ScheduleRepository;
+import com.example.movie.domain.repository.movie.MovieRepository;
+import jakarta.persistence.EntityManager;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.Session;
+import org.hibernate.stat.Statistics;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class MovieService {
 
     private final MovieRepository movieRepository;
-    private final ScheduleRepository scheduleRepository;
 
-    public List<MovieResponseDto> getMovies() {
-        List<Movie> movies = movieRepository.findAllByOrderByReleaseDateDesc();
+    @Transactional(readOnly = true)
+    public List<MovieResponseDto> getMovies(Long theaterId) {
 
-        return movies.stream()
-                .map(movie -> {
-                    List<Schedule> schedules = scheduleRepository.findByMovieIdOrderByStartAtAsc(movie.getId());
-                    if (!schedules.isEmpty()) {
-                        return MovieResponseDto.fromEntity(movie, schedules);
-                    }
-                    return null;
-                })
-                .filter(dto -> dto != null)
-                .collect(Collectors.toList());
+        List<Movie> movies = movieRepository.findNowShowingMovies(theaterId);
+
+        List<MovieResponseDto> movieResponseDtos = movies.stream()
+                .map(movie -> MovieResponseDto.fromEntity(movie, movie.getSchedules())).toList();
+
+        return movieResponseDtos;
     }
 }
