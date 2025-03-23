@@ -2,16 +2,20 @@ package com.example.movie.domain.entity;
 
 
 import com.example.movie.common.entity.BaseEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -39,6 +43,9 @@ public class Movie extends BaseEntity {
 
     private LocalDate releaseDate;
     private int runningTime;
+
+    @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Schedule> schedules;
 
     @Builder
     public Movie(String title, String thumbnailUrl, Genre genre, Rating rating, LocalDate releaseDate, int runningTime) {
