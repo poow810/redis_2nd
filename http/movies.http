@@ -1,3 +1,0 @@
-### 영화 조회 (1주차)
-GET http://localhost:8080/movies?theater_id=2
-Accept: application/json
