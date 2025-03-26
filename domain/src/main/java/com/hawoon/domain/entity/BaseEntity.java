@@ -1,4 +1,4 @@
-package com.hawoon.common.entity;
+package com.hawoon.domain.entity;
 
 
 import jakarta.persistence.Column;

@@ -4,6 +4,7 @@ package com.hawoon.api.dto;
 import com.hawoon.domain.entity.Movie;
 import com.hawoon.domain.entity.Schedule;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;
@@ -17,7 +18,7 @@ public class MovieResponseDto {
     private final String thumbnailUrl;
     private final String genre;
     private final String rating;
-    private final LocalDate releaseDate;
+    private final LocalDateTime releaseDate;
     private final int runningTime;
     private final List<ScheduleResponseDto> schedules;
 

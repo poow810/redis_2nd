@@ -4,10 +4,17 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
     implementation project(':domain')
-    implementation project(':infra')
     implementation project(':common')
 }
 
 springBoot {
     mainClass = 'com.hawoon.api.ApiApplication'
+}
+
+sourceSets {
+    test {
+        java {
+            srcDirs = ['src/test/java']
+        }
+    }
 }

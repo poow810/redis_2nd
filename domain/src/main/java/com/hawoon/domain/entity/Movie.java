@@ -1,7 +1,5 @@
 package com.hawoon.domain.entity;
 
-
-import com.hawoon.common.entity.BaseEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -40,14 +39,14 @@ public class Movie extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Rating rating;
 
-    private LocalDate releaseDate;
+    private LocalDateTime releaseDate;
     private int runningTime;
 
     @OneToMany(mappedBy = "movie", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Schedule> schedules;
 
     @Builder
-    public Movie(String title, String thumbnailUrl, Genre genre, Rating rating, LocalDate releaseDate, int runningTime) {
+    public Movie(String title, String thumbnailUrl, Genre genre, Rating rating, LocalDateTime releaseDate, int runningTime) {
         this.title = title;
         this.thumbnailUrl = thumbnailUrl;
         this.genre = genre;

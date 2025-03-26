@@ -1,6 +1,5 @@
 package com.hawoon.domain.entity;
 
-import com.hawoon.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
