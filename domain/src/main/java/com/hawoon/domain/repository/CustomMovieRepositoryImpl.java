@@ -1,10 +1,12 @@
 package com.hawoon.domain.repository;
 
+import com.hawoon.domain.dto.MovieScheduleDto;
 import com.hawoon.domain.entity.Genre;
 import com.hawoon.domain.entity.Movie;
 import com.hawoon.domain.entity.QMovie;
 import com.hawoon.domain.entity.QSchedule;
 import com.hawoon.domain.entity.QTheater;
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.querydsl.core.types.dsl.BooleanExpression;
 
@@ -19,16 +21,27 @@ public class CustomMovieRepositoryImpl implements CustomMovieRepository {
     }
 
     @Override
-    public List<Movie> findNowShowingMovies(Long theaterId, String title, Genre genre) {
+    public List<MovieScheduleDto> findNowShowingMovies(Long theaterId, String title, Genre genre) {
         QMovie movie = QMovie.movie;
         QSchedule schedule = QSchedule.schedule;
         QTheater theater = QTheater.theater;
 
         return queryFactory
-                .selectDistinct(movie)
+                .select(Projections.constructor(MovieScheduleDto.class,
+                        movie.id,
+                        movie.title,
+                        movie.rating,
+                        movie.releaseDate,
+                        movie.thumbnailUrl,
+                        movie.runningTime,
+                        movie.genre,
+                        theater.theaterName,
+                        schedule.startAt,
+                        schedule.endAt
+                ))
                 .from(movie)
-                .join(movie.schedules, schedule).fetchJoin()
-                .join(schedule.theater, theater).fetchJoin()
+                .join(movie.schedules, schedule)
+                .join(schedule.theater, theater)
                 .where(
                         theater.id.eq(theaterId),
                         movie.releaseDate.loe(schedule.startAt),
