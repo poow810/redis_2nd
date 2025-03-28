@@ -1,10 +1,8 @@
-package com.hawoon.api.dto;
+package com.hawoon.api.dto.response;
 
 import com.hawoon.domain.dto.MovieScheduleDto;
 import com.hawoon.domain.entity.Genre;
-import com.hawoon.domain.entity.Movie;
 import com.hawoon.domain.entity.Rating;
-import com.hawoon.domain.entity.Schedule;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;

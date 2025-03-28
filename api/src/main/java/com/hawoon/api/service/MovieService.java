@@ -1,11 +1,10 @@
 package com.hawoon.api.service;
 
 
-import com.hawoon.api.dto.MovieResponseDto;
-import com.hawoon.api.dto.ScheduleResponseDto;
+import com.hawoon.api.dto.response.MovieResponseDto;
+import com.hawoon.api.dto.response.ScheduleResponseDto;
 import com.hawoon.domain.dto.MovieScheduleDto;
 import com.hawoon.domain.entity.Genre;
-import com.hawoon.domain.entity.Movie;
 import com.hawoon.domain.repository.MovieRepository;
 import java.util.List;
 import java.util.Map;

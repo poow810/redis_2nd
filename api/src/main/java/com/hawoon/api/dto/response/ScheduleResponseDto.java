@@ -1,8 +1,6 @@
-package com.hawoon.api.dto;
+package com.hawoon.api.dto.response;
 
 import com.hawoon.domain.dto.MovieScheduleDto;
-import com.hawoon.domain.entity.Schedule;
-import lombok.Builder;
 
 import java.time.LocalDateTime;
 
